@@ -1,0 +1,19 @@
+<nav class="row   px-5 py-3 text-white" data-aos="fade-down"
+    style="background: linear-gradient(to right, black, rgba(0,0,0,.5));">
+    <div class="col-md-9">
+        <div class="d-flex align-items-center gap-2">
+            <img src="https://primefaces.org/cdn/primeng/images/primeng.svg" />
+            <div class="d-flex flex-column">
+                <span class="fw-bold  fs-6">Jaser Task</span>
+                <span>maids.cc</span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 d-flex justify-content-end">
+        <div>
+            <p-autoComplete [(ngModel)]="selectedCountry" [suggestions]="filteredCountries"
+                (completeMethod)="filterCountry($event)" field="name" placeholder="search" />
+        </div>
+
+    </div>
+</nav>
