@@ -27,8 +27,8 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     AOS.init({
-      duration: 750,
-      delay: 150,
+      duration: 1000,
+      delay: 300,
     });
 
     this._LoadingService.isLoadingAsObs.subscribe({
