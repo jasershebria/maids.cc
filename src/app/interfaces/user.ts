@@ -25,5 +25,7 @@ export interface Users{
    total: number,
    total_pages: number,
    data: User[],
-   support: support
+   support: support,
+   loading:boolean,
+   error:any
 }

@@ -2,6 +2,9 @@ import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { UsersService } from '../../services/users.service';
 import {  User, userDetails } from '../../interfaces/user';
+import { Store } from '@ngrx/store';
+import { loadUser } from '../../actions/users.action';
+import { Observable } from 'rxjs';
 
 
 @Component({
@@ -15,16 +18,24 @@ export class UsersDetailsComponent implements OnInit{
   
   data:User = {} as User;
 
+
+
   private _ActivatedRoute = inject(ActivatedRoute);
   private _UsersService = inject(UsersService);
 
+  // private store = inject(Store)
+
   private _id = this._ActivatedRoute.snapshot.params['id'];
 
-  ngOnInit(): void {
-    this._UsersService.getUserById(this._id).subscribe((res:userDetails)=>{
-      this.data  = res.data;
-
-      // console.log('userdetails',this.data)
-    })
+  constructor(private store: Store<{ users: any }>) {
+    this.store.dispatch(loadUser({id:this._id}));
+    store.select((state) => state.users.data).subscribe(
+      (res)=>{
+        this.data = res
+      }
+    );
+   
   }
+
+  ngOnInit(): void {  }
 }

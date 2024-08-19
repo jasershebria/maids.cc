@@ -9,11 +9,12 @@ import { userDetails, Users } from '../interfaces/user';
 export class UsersService {
   _HttpClient = inject(HttpClient);
 
-  getUsers(pageNum:number):Observable<Users>{
+  getUsers(pageNum:Number):Observable<Users>{
      return this._HttpClient.get<Users>(`https://reqres.in/api/users?page=${pageNum}`);
   }
 
-  getUserById(userId:string):Observable<userDetails>{
+  getUserById(userId:Number):Observable<userDetails>{
+    debugger;
     return this._HttpClient.get<userDetails>(`https://reqres.in/api/users/${userId}`);
   } 
 
