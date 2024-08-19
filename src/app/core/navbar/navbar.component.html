@@ -11,8 +11,9 @@
     </div>
     <div class="col-md-3 d-flex justify-content-end">
         <div>
-            <p-autoComplete [(ngModel)]="selectedCountry" [suggestions]="filteredCountries"
-                (completeMethod)="filterCountry($event)" field="name" placeholder="search" />
+         
+
+            <input type="text" class="form-control" (keyup)="_searchService.searchByid.next($event.target)" placeholder="searchByid">
         </div>
 
     </div>

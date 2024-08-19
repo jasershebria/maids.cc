@@ -8,6 +8,8 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { loadUsers } from '../../actions/users.action';
 import { CommonModule,  } from '@angular/common';
+import { SearchService } from '../../services/search.service';
+import { delay } from 'rxjs';
 
 
 
@@ -34,10 +36,11 @@ export class UsersComponent implements OnInit {
   totalRecords:number = 0;
   perPage:number = 0;
   totalPages:number = 0;
-
+  pageNumber: number = 1;
 
   constructor(
-    private store: Store<{ users: Users }>
+    private store: Store<{ users: Users }>,
+    private _SearchService:SearchService
     ) {
     this.store.select((state) => state.users).subscribe((response:any)=>{
       if(response){
@@ -50,11 +53,28 @@ export class UsersComponent implements OnInit {
   }
  
   ngOnInit(): void {
-    this.store.dispatch(loadUsers({ pageNumber: 1 }));
+    this.store.dispatch(loadUsers({ pageNumber:  this.pageNumber }));
+
+    this._SearchService.seatchByIdAsOBS.pipe(
+      delay(400)
+    ).subscribe((res)=>{
+      console.log('myevent',res.value)
+      if(res.value != ''){
+        this.users= this.users.filter((user)=>  res.value==user['id']);
+      }
+      else{
+        // console.log('myevent',res)
+        this.store.dispatch(loadUsers({ pageNumber:  this.pageNumber}));
+      }
+     
+    })
+
+    
   }
 
   onPageChange(event:any){
-    this.store.dispatch(loadUsers({ pageNumber: event.page+1 }));
+    this.pageNumber =  event.page+1;
+    this.store.dispatch(loadUsers({ pageNumber:  this.pageNumber }));
   }
 
 }

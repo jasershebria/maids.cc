@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, inject, Output } from '@angular/core';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { FormsModule } from '@angular/forms';
+
+import { SearchService } from '../../services/search.service';
       
 
 @Component({
@@ -14,15 +16,9 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './navbar.component.scss'
 })
 export class NavbarComponent {
-  countries: any[] = [];
-
-  selectedCountry: any;
-
-  filteredCountries: any[] = [];
+ 
+ _searchService = inject(SearchService);
 
 
 
-  filterCountry(event:any){
-
-  }
 }

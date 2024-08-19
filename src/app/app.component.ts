@@ -10,9 +10,6 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { Store } from '@ngrx/store';
 import { NavbarComponent } from './core/navbar/navbar.component';
 
-
-
-
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -36,6 +33,8 @@ export class AppComponent implements OnInit {
   isLoading: boolean = false;
 
 
+
+
   ngOnInit(): void {
     AOS.init({
       duration: 1000,
@@ -45,14 +44,12 @@ export class AppComponent implements OnInit {
     this._LoadingService.isLoadingAsObs.subscribe({
       next: (res) => {
         this.isLoading = res;
-        console.log('isloading', this.isLoading)
       }
     })
-  }
 
-  // increment() {
-  //   this._store.dispatch(increment());
-  // }
+    
+  }
+  
 
 
 
