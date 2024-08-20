@@ -42,7 +42,7 @@ export class UsersComponent implements OnInit {
     private store: Store<{ users: Users }>,
     private _SearchService:SearchService
     ) {
-    this.store.select((state) => state.users).subscribe((response:any)=>{
+    this.store.select((state) => state.users).subscribe((response:Users)=>{
       if(response){
         this.users= response['data'];
         this.totalRecords = response['total'];

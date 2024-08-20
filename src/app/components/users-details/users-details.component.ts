@@ -27,10 +27,10 @@ export class UsersDetailsComponent implements OnInit{
 
   private _id = this._ActivatedRoute.snapshot.params['id'];
 
-  constructor(private store: Store<{ users: any }>) {
+  constructor(private store: Store<{ users: userDetails }>) {
     this.store.dispatch(loadUser({id:this._id}));
     store.select((state) => state.users.data).subscribe(
-      (res)=>{
+      (res:User)=>{
         this.data = res
       }
     );
